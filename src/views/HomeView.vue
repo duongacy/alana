@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+  <BaseContainer class="py-24 sm:py-20">
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div
         :class="cn('flex gap-2 flex-col', { 'lg:col-span-2 self-start': product.span === 2 })"
@@ -30,10 +30,11 @@
         </div>
       </div>
     </div>
-  </div>
+  </BaseContainer>
 </template>
 
 <script setup lang="ts">
+import BaseContainer from '@/components/layouts/BaseContainer.vue'
 import { cn } from '@/utils/cn'
 
 const products1 = [

@@ -5,14 +5,14 @@
       aria-label="Global"
     >
       <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your Company</span>
+        <RouterLink :to="getRoute('home').path" class="-m-1.5 p-1.5">
+          <span class="sr-only">Home</span>
           <img
             class="h-8 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt=""
           />
-        </a>
+        </RouterLink>
       </div>
       <div class="flex lg:hidden">
         <button
@@ -27,7 +27,7 @@
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <Popover class="relative">
           <PopoverButton
-            class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+            class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-800"
           >
             Photography
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
@@ -60,20 +60,20 @@
                     />
                   </div>
                   <div class="flex-auto">
-                    <a :href="item.href" class="block font-semibold text-gray-900">
+                    <RouterLink :to="item.to" class="block font-semibold text-gray-800">
                       {{ item.name }}
                       <span class="absolute inset-0" />
-                    </a>
+                    </RouterLink>
                     <p class="mt-1 text-gray-600">{{ item.description }}</p>
                   </div>
                 </div>
               </div>
               <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                <a
+                <RouterLink
                   v-for="item in callsToAction"
                   :key="item.name"
-                  :href="item.href"
-                  class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                  :to="item.to"
+                  class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-800 hover:bg-gray-100"
                 >
                   <component
                     :is="item.icon"
@@ -81,14 +81,14 @@
                     aria-hidden="true"
                   />
                   {{ item.name }}
-                </a>
+                </RouterLink>
               </div>
             </PopoverPanel>
           </transition>
         </Popover>
         <Popover class="relative">
           <PopoverButton
-            class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+            class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-800"
           >
             Content
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
@@ -121,10 +121,10 @@
                     />
                   </div>
                   <div class="flex-auto">
-                    <a :href="item.href" class="block font-semibold text-gray-900">
+                    <RouterLink :to="item.to" class="block font-semibold text-gray-800">
                       {{ item.name }}
                       <span class="absolute inset-0" />
-                    </a>
+                    </RouterLink>
                     <p class="mt-1 text-gray-600">{{ item.description }}</p>
                   </div>
                 </div>
@@ -133,11 +133,21 @@
           </transition>
         </Popover>
 
-        <a href="/about" class="text-sm font-semibold leading-6 text-gray-900">About</a>
-        <a href="/sustainabilitiy" class="text-sm font-semibold leading-6 text-gray-900"
-          >Sustainability</a
+        <RouterLink
+          :to="getRoute('about').path"
+          class="text-sm font-semibold leading-6 text-gray-800"
+          >About</RouterLink
         >
-        <a href="/contact" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
+        <RouterLink
+          :to="getRoute('sustainability').path"
+          class="text-sm font-semibold leading-6 text-gray-800"
+          >Sustainability</RouterLink
+        >
+        <RouterLink
+          :to="getRoute('contact').path"
+          class="text-sm font-semibold leading-6 text-gray-800"
+          >Contact</RouterLink
+        >
       </PopoverGroup>
     </nav>
     <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -146,14 +156,14 @@
         class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
       >
         <div class="flex items-center justify-between">
-          <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
+          <RouterLink :to="getRoute('home').path" class="-m-1.5 p-1.5">
+            <span class="sr-only">Home</span>
             <img
               class="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt=""
             />
-          </a>
+          </RouterLink>
           <button
             type="button"
             class="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -168,7 +178,7 @@
             <div class="space-y-2 py-6">
               <Disclosure as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton
-                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >
                   Photography
                   <ChevronDownIcon
@@ -180,9 +190,9 @@
                   <DisclosureButton
                     v-for="item in [...photography]"
                     :key="item.name"
-                    as="a"
-                    :href="item.href"
-                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    as="router-link"
+                    :to="item.to"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                   >
                     {{ item.name }}</DisclosureButton
                   >
@@ -190,7 +200,7 @@
               </Disclosure>
               <Disclosure as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton
-                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >
                   Content
                   <ChevronDownIcon
@@ -202,28 +212,28 @@
                   <DisclosureButton
                     v-for="item in [...content]"
                     :key="item.name"
-                    as="a"
-                    :href="item.href"
-                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    as="router-link"
+                    :to="item.to"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                   >
                     {{ item.name }}</DisclosureButton
                   >
                 </DisclosurePanel>
               </Disclosure>
-              <a
-                href="/about"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >About</a
+              <RouterLink
+                :to="getRoute('about').path"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                >About</RouterLink
               >
-              <a
-                href="/sustainabilitiy"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Sustainability</a
+              <RouterLink
+                :to="getRoute('sustainability').path"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                >Sustainability</RouterLink
               >
-              <a
-                href="/contact"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Contact</a
+              <RouterLink
+                :to="getRoute('contact').path"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                >Contact</RouterLink
               >
             </div>
           </div>
@@ -234,7 +244,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { getRoute } from '@/router'
 import {
   Dialog,
   DialogPanel,
@@ -246,34 +256,34 @@ import {
   PopoverGroup,
   PopoverPanel
 } from '@headlessui/vue'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 import {
-  ArrowPathIcon,
   Bars3Icon,
   ChartPieIcon,
   CursorArrowRaysIcon,
   FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const photography = [
   {
     name: 'Fashion',
     description: 'Get a better understanding of your traffic',
-    href: '/photography/fashion',
+    to: '/photography/fashion',
     icon: ChartPieIcon
   },
   {
     name: 'Advertising',
     description: 'Speak directly to your customers',
-    href: '/photography/advertising',
+    to: '/photography/advertising',
     icon: CursorArrowRaysIcon
   },
   {
     name: 'Editorials',
     description: 'Your customers’ data will be safe and secure',
-    href: '/photography/editorials',
+    to: '/photography/editorials',
     icon: FingerPrintIcon
   }
 ]
@@ -281,28 +291,27 @@ const content = [
   {
     name: 'Fashion',
     description: 'Get a better understanding of your traffic',
-    href: '/content/fashion',
+    to: '/content/fashion',
     icon: ChartPieIcon
   },
   {
     name: 'Advertising',
     description: 'Speak directly to your customers',
-    href: '/content/advertising',
+    to: '/content/advertising',
     icon: CursorArrowRaysIcon
   },
   {
     name: 'Editorials',
     description: 'Your customers’ data will be safe and secure',
-    href: '/content/editorials',
+    to: '/content/editorials',
     icon: FingerPrintIcon
   }
 ]
 
 const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon }
+  { name: 'Watch demo', to: '#', icon: PlayCircleIcon },
+  { name: 'Contact sales', to: '#', icon: PhoneIcon }
 ]
 
 const mobileMenuOpen = ref(false)
 </script>
-Í

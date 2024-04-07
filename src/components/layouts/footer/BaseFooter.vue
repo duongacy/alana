@@ -11,24 +11,24 @@
         <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Photography</h3>
+              <h3 class="text-sm font-semibold leading-6 text-gray-800">Photography</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.photography" :key="item.name">
                   <a
                     :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                    class="text-sm leading-6 text-gray-600 hover:text-gray-800"
                     >{{ item.name }}</a
                   >
                 </li>
               </ul>
             </div>
             <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Content</h3>
+              <h3 class="text-sm font-semibold leading-6 text-gray-800">Content</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.content" :key="item.name">
                   <a
                     :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                    class="text-sm leading-6 text-gray-600 hover:text-gray-800"
                     >{{ item.name }}</a
                   >
                 </li>
@@ -37,12 +37,12 @@
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Company</h3>
+              <h3 class="text-sm font-semibold leading-6 text-gray-800">Company</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
                   <a
                     :href="item.href"
-                    class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                    class="text-sm leading-6 text-gray-600 hover:text-gray-800"
                     >{{ item.name }}</a
                   >
                 </li>
@@ -55,7 +55,7 @@
         class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 lg:flex lg:items-center lg:justify-between"
       >
         <div>
-          <h3 class="text-sm font-semibold leading-6 text-gray-900">Subscribe to our newsletter</h3>
+          <h3 class="text-sm font-semibold leading-6 text-gray-800">Subscribe to our newsletter</h3>
           <p class="mt-2 text-sm leading-6 text-gray-600">
             The latest news, articles, and resources, sent to your inbox weekly.
           </p>
@@ -68,7 +68,7 @@
             id="email-address"
             autocomplete="email"
             required
-            class="w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:w-56 sm:text-sm sm:leading-6"
+            class="w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:w-56 sm:text-sm sm:leading-6"
             placeholder="Enter your email"
           />
           <div class="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
