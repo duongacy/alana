@@ -3,39 +3,39 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: import('../views/HomeView.vue')
+    component: () => import('../views/HomeView.vue')
   },
   /* Photography */
   {
     path: '/photography/fashion',
     name: 'photographyFashion',
-    component: import('../views/photography/PhotographyFashionView.vue')
+    component: () => import('../views/photography/PhotographyFashionView.vue')
   },
   {
     path: '/photography/advertising',
     name: 'photographyAdvertising',
-    component: import('../views/photography/PhotographyAdvertisingView.vue')
+    component: () => import('../views/photography/PhotographyAdvertisingView.vue')
   },
   {
     path: '/photography/editorials',
     name: 'photographyEditorials',
-    component: import('../views/photography/PhotographyEditorialsView.vue')
+    component: () => import('../views/photography/PhotographyEditorialsView.vue')
   },
   /* Content */
   {
     path: '/content/fashion',
     name: 'contentFashion',
-    component: import('../views/content/ContentFashionView.vue')
+    component: () => import('../views/content/ContentFashionView.vue')
   },
   {
     path: '/content/advertising',
     name: 'contentAdvertising',
-    component: import('../views/content/ContentAdvertisingView.vue')
+    component: () => import('../views/content/ContentAdvertisingView.vue')
   },
   {
     path: '/content/editorials',
     name: 'contentEditorials',
-    component: import('../views/content/ContentEditorialsView.vue')
+    component: () => import('../views/content/ContentEditorialsView.vue')
   },
 
   {

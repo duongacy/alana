@@ -1,42 +1,54 @@
 <template>
   <BaseContainer class="py-24 sm:py-20">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div
-        :class="cn('flex gap-2 flex-col', { 'lg:col-span-2 self-start': product.span === 2 })"
-        v-for="product in products1"
-        :key="product.id"
-      >
-        <img
-          :class="cn('aspect-[3/4] flex-grow object-cover', { 'aspect-[3/2]': product.span === 2 })"
-          :src="product.imageSrc"
-          :alt="product.imageAlt"
-          v-if="!!product.imageSrc"
-        />
-        <video
-          controls
-          v-if="!!product.videoSrc"
-          :class="
-            cn('aspect-[3/4] bg-red-300 flex-grow object-cover', {
-              'aspect-[3/2]': product.span === 2
-            })
-          "
+    <BaseSection>
+      <BreadScrumb :pages="pages" />
+      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mt-24 mb-16 text-neutral-800">
+        Alana
+      </h1>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div
+          :class="cn('flex gap-2 flex-col', { 'lg:col-span-2 self-start': product.span === 2 })"
+          v-for="product in products1"
+          :key="product.id"
         >
-          <source :src="product.videoSrc" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div>
-          <p class="font-bold text-neutral-800 line-clamp-1">{{ product.name }}</p>
-          <p class="font-light text-neutral-600 line-clamp-1">{{ product.description }}</p>
+          <img
+            :class="
+              cn('aspect-[3/4] flex-grow object-cover', { 'aspect-[3/2]': product.span === 2 })
+            "
+            :src="product.imageSrc"
+            :alt="product.imageAlt"
+            v-if="!!product.imageSrc"
+          />
+          <video
+            controls
+            v-if="!!product.videoSrc"
+            :class="
+              cn('aspect-[3/4] bg-red-300 flex-grow object-cover', {
+                'aspect-[3/2]': product.span === 2
+              })
+            "
+          >
+            <source :src="product.videoSrc" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div>
+            <p class="font-bold text-neutral-800 line-clamp-1">{{ product.name }}</p>
+            <p class="font-light text-neutral-600 line-clamp-1">{{ product.description }}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </BaseSection>
   </BaseContainer>
 </template>
 
 <script setup lang="ts">
 import BaseContainer from '@/components/layouts/BaseContainer.vue'
+import BaseSection from '@/components/layouts/BaseSection.vue'
+import BreadScrumb from '@/components/layouts/BreadScrumb.vue'
+import { getRoute } from '@/router'
 import { cn } from '@/utils/cn'
 
+const pages = [{ name: 'Home', to: getRoute('home').path, current: true }]
 const products1 = [
   {
     id: 1,

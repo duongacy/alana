@@ -1,6 +1,6 @@
 <template>
   <BaseContainer class="py-24 sm:py-20">
-    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+    <BaseSection>
       <BreadScrumb :pages="pages" />
       <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mt-24 mb-16 text-neutral-800">
         Contact with us
@@ -24,11 +24,12 @@
           </dl>
         </div>
       </div>
-    </div>
+    </BaseSection>
   </BaseContainer>
 </template>
 <script lang="ts" setup>
 import BaseContainer from '@/components/layouts/BaseContainer.vue'
+import BaseSection from '@/components/layouts/BaseSection.vue'
 import BreadScrumb from '@/components/layouts/BreadScrumb.vue'
 
 const pages = [{ name: 'Contact', to: '#', current: true }]

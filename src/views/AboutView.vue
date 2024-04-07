@@ -63,7 +63,7 @@
         <div class="overflow-hidden">
           <BaseContainer class="py-24 sm:py-20">
             <BreadScrumb :pages="pages" />
-            <div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
+            <BaseSection class="gap-x-14 lg:flex lg:items-center">
               <div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-800 sm:text-6xl">
                   We’re changing the way people connect.
@@ -137,7 +137,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </BaseSection>
           </BaseContainer>
         </div>
       </div>
@@ -315,6 +315,7 @@
 
 <script setup lang="ts">
 import BaseContainer from '@/components/layouts/BaseContainer.vue'
+import BaseSection from '@/components/layouts/BaseSection.vue'
 import BreadScrumb from '@/components/layouts/BreadScrumb.vue'
 import { getRoute } from '@/router'
 

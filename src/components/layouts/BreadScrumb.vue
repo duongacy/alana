@@ -40,7 +40,7 @@ defineProps<{
   pages: {
     name: string
     to: string
-    current: boolean
+    current?: boolean
   }[]
 }>()
 </script>
