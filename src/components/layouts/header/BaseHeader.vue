@@ -42,7 +42,7 @@
             <PopoverPanel
               class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
             >
-              <div class="p-4">
+              <div class="p-4" @click="handleClick">
                 <div
                   v-for="item in photography"
                   :key="item.name"
@@ -101,7 +101,7 @@
             <PopoverPanel
               class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
             >
-              <div class="p-4">
+              <div class="p-4" @click="handleClick">
                 <div
                   v-for="item in content"
                   :key="item.name"
@@ -140,7 +140,12 @@
         </RouterLink>
       </PopoverGroup>
     </nav>
-    <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
+    <Dialog
+      as="div"
+      class="lg:hidden font-serif"
+      @close="mobileMenuOpen = false"
+      :open="mobileMenuOpen"
+    >
       <div class="fixed inset-0 z-10" />
       <DialogPanel
         class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
@@ -165,11 +170,9 @@
         </div>
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
-            <div class="space-y-2 py-6">
-              <Disclosure as="div" class="-mx-3" v-slot="{ open }">
-                <DisclosureButton
-                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
-                >
+            <div class="space-y-2 py-6 [&_button]:w-full">
+              <Disclosure as="div" class="-mx-3" :default-open="isPhotography" v-slot="{ open }">
+                <DisclosureButton :class="navLinkButtonStyle(isPhotography)">
                   Photography
                   <ChevronDownIcon
                     :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']"
@@ -177,21 +180,19 @@
                   />
                 </DisclosureButton>
                 <DisclosurePanel class="mt-2 space-y-2">
-                  <DisclosureButton
+                  <RouterLink
+                    v-slot="{ isActive }"
                     v-for="item in [...photography]"
                     :key="item.name"
-                    as="router-link"
                     :to="item.to"
-                    class="block rounded-lg py-2 pl-6 pr-3 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                    :class="['indent-5', navLinkButtonStyle()]"
                   >
-                    {{ item.name }}</DisclosureButton
-                  >
+                    <span :class="cn({ 'underline ': isActive })">{{ item.name }}</span>
+                  </RouterLink>
                 </DisclosurePanel>
               </Disclosure>
-              <Disclosure as="div" class="-mx-3" v-slot="{ open }">
-                <DisclosureButton
-                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
-                >
+              <Disclosure as="div" class="-mx-3" :default-open="isContent" v-slot="{ open }">
+                <DisclosureButton :class="navLinkButtonStyle(isContent)">
                   Content
                   <ChevronDownIcon
                     :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']"
@@ -199,43 +200,41 @@
                   />
                 </DisclosureButton>
                 <DisclosurePanel class="mt-2 space-y-2">
-                  <DisclosureButton
+                  <RouterLink
+                    v-slot="{ isActive }"
                     v-for="item in [...content]"
                     :key="item.name"
-                    as="router-link"
                     :to="item.to"
-                    class="block rounded-lg py-2 pl-6 pr-3 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                    :class="['indent-5', navLinkButtonStyle()]"
                   >
-                    {{ item.name }}</DisclosureButton
-                  >
+                    <span :class="cn({ 'underline ': isActive })">{{ item.name }}</span>
+                  </RouterLink>
                 </DisclosurePanel>
               </Disclosure>
-              <RouterLink
-                :to="getRoute('about').path"
-                class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
-                >About</RouterLink
-              >
-              <RouterLink
-                :to="getRoute('sustainability').path"
-                class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
-                >Sustainability</RouterLink
-              >
-              <RouterLink
-                :to="getRoute('contact').path"
-                class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
-                >Contact</RouterLink
+              <RouterLink v-slot="{ isActive }" :to="getRoute('about').path"
+                ><span :class="cn(navLinkButtonStyle(isActive), '-ml-3')"> About </span>
+              </RouterLink>
+              <RouterLink v-slot="{ isActive }" :to="getRoute('sustainability').path">
+                <span :class="cn(navLinkButtonStyle(isActive), '-ml-3')"> Sustainability </span>
+              </RouterLink>
+              <RouterLink v-slot="{ isActive }" :to="getRoute('contact').path">
+                <span :class="cn(navLinkButtonStyle(isActive), '-ml-3')">
+                  Contact
+                </span></RouterLink
               >
             </div>
           </div>
         </div>
       </DialogPanel>
     </Dialog>
+    <button class="absolute w-0" ref="divRef"></button>
   </header>
 </template>
 
 <script setup lang="ts">
 import { navLinkButtonStyle } from '@/components/button'
 import { getRoute } from '@/router'
+import { cn } from '@/utils/cn'
 import {
   Dialog,
   DialogPanel,
@@ -255,7 +254,7 @@ import {
   FingerPrintIcon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 const photography = [
@@ -303,10 +302,22 @@ const callsToAction = [
   { name: 'Watch demo', to: '#', icon: PlayCircleIcon },
   { name: 'Contact sales', to: '#', icon: PhoneIcon }
 ]
-
+const handleClick = (event: Event) => {
+  // document.getElementById('photography')?.click()
+  console.log(
+    (event.currentTarget as HTMLElement).parentElement?.parentElement?.querySelector('button')
+  )
+  ;(event.currentTarget as HTMLElement).parentElement?.parentElement
+    ?.querySelector('button')
+    ?.click()
+}
 const route = useRoute()
 const isPhotography = computed(() => route.path.includes('/photography'))
 const isContent = computed(() => route.path.includes('/content'))
+const divRef = ref<HTMLElement | null>(null)
 
 const mobileMenuOpen = ref(false)
+watch(route, () => {
+  mobileMenuOpen.value = false
+})
 </script>
