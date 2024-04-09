@@ -26,9 +26,7 @@
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <Popover class="relative">
-          <PopoverButton
-            class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-800"
-          >
+          <PopoverButton :class="navLinkButtonStyle(isPhotography)">
             Photography
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
@@ -48,7 +46,7 @@
                 <div
                   v-for="item in photography"
                   :key="item.name"
-                  class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                  class="group relative flex items-center gap-x-6 rounded-lg p-4 text-xl leading-6 hover:bg-gray-50"
                 >
                   <div
                     class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
@@ -73,7 +71,7 @@
                   v-for="item in callsToAction"
                   :key="item.name"
                   :to="item.to"
-                  class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-800 hover:bg-gray-100"
+                  class="flex items-center justify-center gap-x-2.5 p-3 text-xl font-semibold leading-6 text-gray-800 hover:bg-gray-100"
                 >
                   <component
                     :is="item.icon"
@@ -87,9 +85,7 @@
           </transition>
         </Popover>
         <Popover class="relative">
-          <PopoverButton
-            class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-800"
-          >
+          <PopoverButton :class="navLinkButtonStyle(isContent)">
             Content
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
@@ -109,7 +105,7 @@
                 <div
                   v-for="item in content"
                   :key="item.name"
-                  class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                  class="group relative flex items-center gap-x-6 rounded-lg p-4 text-xl leading-6 hover:bg-gray-50"
                 >
                   <div
                     class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
@@ -133,21 +129,15 @@
           </transition>
         </Popover>
 
-        <RouterLink
-          :to="getRoute('about').path"
-          class="text-sm font-semibold leading-6 text-gray-800"
-          >About</RouterLink
-        >
-        <RouterLink
-          :to="getRoute('sustainability').path"
-          class="text-sm font-semibold leading-6 text-gray-800"
-          >Sustainability</RouterLink
-        >
-        <RouterLink
-          :to="getRoute('contact').path"
-          class="text-sm font-semibold leading-6 text-gray-800"
-          >Contact</RouterLink
-        >
+        <RouterLink v-slot="{ isActive }" :to="getRoute('about').path">
+          <span :class="navLinkButtonStyle(isActive)"> About </span>
+        </RouterLink>
+        <RouterLink v-slot="{ isActive }" :to="getRoute('sustainability').path">
+          <span :class="navLinkButtonStyle(isActive)"> Sustainability </span>
+        </RouterLink>
+        <RouterLink v-slot="{ isActive }" :to="getRoute('contact').path">
+          <span :class="navLinkButtonStyle(isActive)"> Contact </span>
+        </RouterLink>
       </PopoverGroup>
     </nav>
     <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -178,7 +168,7 @@
             <div class="space-y-2 py-6">
               <Disclosure as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton
-                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >
                   Photography
                   <ChevronDownIcon
@@ -192,7 +182,7 @@
                     :key="item.name"
                     as="router-link"
                     :to="item.to"
-                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                   >
                     {{ item.name }}</DisclosureButton
                   >
@@ -200,7 +190,7 @@
               </Disclosure>
               <Disclosure as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton
-                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >
                   Content
                   <ChevronDownIcon
@@ -214,7 +204,7 @@
                     :key="item.name"
                     as="router-link"
                     :to="item.to"
-                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                   >
                     {{ item.name }}</DisclosureButton
                   >
@@ -222,17 +212,17 @@
               </Disclosure>
               <RouterLink
                 :to="getRoute('about').path"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >About</RouterLink
               >
               <RouterLink
                 :to="getRoute('sustainability').path"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >Sustainability</RouterLink
               >
               <RouterLink
                 :to="getRoute('contact').path"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-50"
+                class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold leading-7 text-gray-800 hover:bg-gray-50"
                 >Contact</RouterLink
               >
             </div>
@@ -244,6 +234,7 @@
 </template>
 
 <script setup lang="ts">
+import { navLinkButtonStyle } from '@/components/button'
 import { getRoute } from '@/router'
 import {
   Dialog,
@@ -264,8 +255,8 @@ import {
   FingerPrintIcon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { computed, ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
 const photography = [
   {
@@ -312,6 +303,10 @@ const callsToAction = [
   { name: 'Watch demo', to: '#', icon: PlayCircleIcon },
   { name: 'Contact sales', to: '#', icon: PhoneIcon }
 ]
+
+const route = useRoute()
+const isPhotography = computed(() => route.path.includes('/photography'))
+const isContent = computed(() => route.path.includes('/content'))
 
 const mobileMenuOpen = ref(false)
 </script>

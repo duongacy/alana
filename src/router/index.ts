@@ -39,6 +39,13 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/album/:id',
+    name: 'album',
+    component: () => import('../views/AlbumView.vue'),
+    props: true
+  },
+
+  {
     path: '/about',
     name: 'about',
     component: () => import('../views/AboutView.vue')
@@ -72,6 +79,7 @@ export const getRoute = (
     | 'about'
     | 'contact'
     | 'sustainability'
+    | 'album'
 ) => {
   return routes.find((route) => route.name === name)!
 }
